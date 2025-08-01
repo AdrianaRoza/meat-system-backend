@@ -1,7 +1,12 @@
 from fastapi import FastAPI
+from .database import Base, engine
+from . import models
 
 app = FastAPI()
 
+# Cria as tabelas se ainda não existirem
+Base.metadata.create_all(bind=engine)
+
 @app.get("/")
 def home():
-    return {"message": "API do Açougue funcionando!"}
+    return {"message": "Butcher Shop API is running!"}
