@@ -13,8 +13,8 @@ class MeatCreate(MeatBase):
 class MeatUpdate(MeatBase):
     pass
 
-class MeatResponse(MeatBase):
-    id: int
-
-    class Config:
-        orm_mode = True
+class MeatResponse(BaseModel):
+    ...
+    model_config = {
+        "from_attributes": True
+    }
