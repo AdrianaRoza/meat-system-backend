@@ -1,12 +1,12 @@
 from sqlalchemy.orm import Session
-from app.schemas import schemas
-from app.models import models
+from app.schemas import MeatSchemas
+from app.models import MeatModels
 
-from app.models.models import Meat
+from app.models.MeatModels import Meat
 
 # Create meat
-def create_meat(db: Session, meat_data: schemas.MeatCreate):
-    new_meat = models.Meat(**meat_data.dict())
+def create_meat(db: Session, meat_data: MeatSchemas.MeatCreate):
+    new_meat = MeatModels.Meat(**meat_data.dict())
     db.add(new_meat)
     db.commit()
     db.refresh(new_meat)
@@ -14,15 +14,15 @@ def create_meat(db: Session, meat_data: schemas.MeatCreate):
 
 # Get all meats
 def get_all_meats(db: Session):
-    return db.query(models.Meat).all()
+    return db.query(MeatModels.Meat).all()
 
 # Get one meat by ID
 def get_meat_by_id(db: Session, meat_id: int):
-    return db.query(models.Meat).filter(models.Meat.id == meat_id).first()
+    return db.query(MeatModels.Meat).filter(MeatModels.Meat.id == meat_id).first()
 
 # Update meat
-def update_meat(db: Session, meat_id: int, meat_data: schemas.MeatUpdate):
-    meat = db.query(models.Meat).filter(models.Meat.id == meat_id).first()
+def update_meat(db: Session, meat_id: int, meat_data: MeatSchemas.MeatUpdate):
+    meat = db.query(MeatModels.Meat).filter(MeatModels.Meat.id == meat_id).first()
     if meat:
         for field, value in meat_data.dict().items():
             setattr(meat, field, value)
@@ -32,7 +32,7 @@ def update_meat(db: Session, meat_id: int, meat_data: schemas.MeatUpdate):
 
 # Delete meat
 def delete_meat(db: Session, meat_id: int):
-    meat = db.query(models.Meat).filter(models.Meat.id == meat_id).first()
+    meat = db.query(MeatModels.Meat).filter(MeatModels.Meat.id == meat_id).first()
     if meat:
         db.delete(meat)
         db.commit()
