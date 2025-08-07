@@ -2,7 +2,6 @@ from sqlalchemy.orm import Session
 from app.schemas import MeatSchemas
 from app.models import MeatModels
 
-from app.models.MeatModels import Meat
 
 # Create meat
 def create_meat(db: Session, meat_data: MeatSchemas.MeatCreate):
