@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.models import MeatModels
 from app.schemas import MeatSchemas
-from app import crud
+from app.crud import crud
 from ..database import SessionLocal
 
 router = APIRouter(
