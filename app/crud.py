@@ -1,5 +1,8 @@
 from sqlalchemy.orm import Session
-from . import models, schemas
+from app.schemas import schemas
+from app.models import models
+
+from app.models.models import Meat
 
 # Create meat
 def create_meat(db: Session, meat_data: schemas.MeatCreate):
