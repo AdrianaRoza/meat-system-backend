@@ -1,3 +1,4 @@
+from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String, Float
 from ..database import Base
 
@@ -9,3 +10,8 @@ class Meat(Base):
     type = Column(String, nullable=False)
     price_per_kg = Column(Float, nullable=False)
     stock_kg = Column(Float, nullable=False)
+
+
+# Relacionamentos
+    sales = relationship("Sale", back_populates="meat")
+    restocks = relationship("Restock", back_populates="meat")
