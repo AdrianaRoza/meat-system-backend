@@ -17,3 +17,11 @@ SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
 
 # Base para criar os modelos
 Base = declarative_base()
+
+# Função para fornecer a sessão para o FastAPI
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
