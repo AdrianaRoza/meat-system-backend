@@ -1,4 +1,4 @@
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from app.models.SaleModels import Sale
 from app.models.MeatModels import Meat
 from app.schemas.SaleSchema import SaleCreate
@@ -24,8 +24,9 @@ def create_sale(db: Session, sale_data: SaleCreate):
     db.add(new_sale)
     db.commit()
     db.refresh(new_sale)
+    db.refresh(meat)
     return new_sale
 
 
 def get_all_sales(db: Session):
-    return db.query(Sale).all()
+    return db.query(Sale).options(joinedload(Sale.meat)).all()
